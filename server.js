@@ -84,8 +84,6 @@ server.applyMiddleware({ app });
 
 app.use(cors());
 
-const port = process.env.PORT || 4000;
-
 app.listen({ port: 4000 }, () =>
     console.log('Server up on http://localhost:4000' + server.graphqlPath)
 );
