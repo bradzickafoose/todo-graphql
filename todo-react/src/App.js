@@ -33,6 +33,15 @@ const UPDATE_TODO = gql`
 `;
 
 function App() {
+
+  // useQuery to read todos from the server
+  // Use object destructuring to get data, loading, error which is used to update the UI
+  const { data, loading, error } = useQuery(READ_TODOS);
+
+  if (loading) return <p>loading...</p>;
+  if (error) return <p>Error reading todos</p>;
+  if (!data) return <p>Not todos found</p>;
+
   return (
     <div className="App">
       <header className="App-header">
