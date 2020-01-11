@@ -61,3 +61,19 @@ const resolvers = {
         }
     }
 };
+
+// Pass the type definitions and resolvers to create ApolloServer
+// Use cors() to allow cross-origin requests
+// Serve app on port
+
+const server = new ApolloServer({ typeDefs, resolvers });
+
+const app = express();
+server.applyMiddleware({ app });
+
+app.use(cors());
+
+const port = process.env.PORT || 4000;
+
+app.listen(port, () =>
+    console.log(`***********SERVER UP ON ${port}************`))
