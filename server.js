@@ -33,3 +33,31 @@ const typeDefs = gql`
     }
 `;
 
+// Add resolvers
+// Resolvers are functions that run when queries and mutations are made.
+// This is where we fetch and manipulate the data that's returned to the client.
+// Mutations receive 4 arguments, but of particular interest is args, which contains the data passed from the client
+// We use that data to manipulate the array of todos and return a result.
+const resolvers = {
+    Query: {
+        todos: () => todos,
+    },
+    Mutation: {
+        createTodo: (parent, args, context, info) => {
+
+            return todos.push({
+                id: Date.now().toString(),
+                text: args.text,
+                completed: false,
+            });
+        },
+        removeTodo: (parent, args, context, info) => {
+            for (let i in todos) {
+                if (todos[i].id === args.id) {
+                    todos.splice(i, 1);
+                }
+            }
+            return args.id
+        }
+    }
+};
