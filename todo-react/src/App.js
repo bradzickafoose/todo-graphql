@@ -3,6 +3,35 @@ import './App.css';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+// define all the queries and mutations
+const READ_TODOS = gql`
+  query todos{
+    todos {
+      id
+      text
+      completed
+    }
+  }
+`;
+
+const CREATE_TODO = gql`
+  mutation CreateTodo($text: String!) {
+    createTodo(text: $text)
+  }
+`;
+
+const REMOVE_TODO = gql`
+  mutation RemoveTodo($id: String!) {
+    removeTodo(id: $id)
+  }
+`;
+
+const UPDATE_TODO = gql`
+  mutation UpdateTodo($id: String!) {
+    updateTodo(id: $id)
+  }
+`;
+
 function App() {
   return (
     <div className="App">
