@@ -1,0 +1,27 @@
+{
+  "name": "todo-graphql",
+  "version": "1.0.0",
+  "description": "Build a CRUD Application with React and Apollo GraphQL",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2",
+    "apollo-server-express": "^2.9.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradzickafoose/todo-graphql.git"
+  },
+  "author": "Brad Zickafoose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bradzickafoose/todo-graphql/issues"
+  },
+  "homepage": "https://github.com/bradzickafoose/todo-graphql#readme"
+}

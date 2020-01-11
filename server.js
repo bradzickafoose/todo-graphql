@@ -6,18 +6,19 @@ const cors = require('cors');
 // Setup an array to store todos
 let todos = [
     {
-        id: 0,
+        id: Date.now().toString(),
         text: 'Build a CRUD Application with React and Apollo GraphQL',
         completed: false,
     },
 ];
+
 
 // Define a schema called Todo
 // Define query. The (!) signifies that it will always return something.
 // Think of a query as the way you fetch data from the GraphQL server. It's like a GET request in REST.
 // Define mutations. A mutation is a way to update data on the server.
 // First mutation, createTodo, accepts one parameter, text, which must be a String. It returns a string after it's finished.
-// The second mutation, removeTodo, does the same.
+// The second and third mutation, removeTodo and updateTodo, do the same.
 const typeDefs = gql`
     type Todo {
         id: String
@@ -29,9 +30,11 @@ const typeDefs = gql`
     }
     type Mutation {
         createTodo(text: String!):String
-        removeTodo(id: String!)
+        removeTodo(id: String!):String
+        updateTodo(id: String!):String
     }
 `;
+
 
 // Add resolvers
 // Resolvers are functions that run when queries and mutations are made.
@@ -57,7 +60,15 @@ const resolvers = {
                     todos.splice(i, 1);
                 }
             }
-            return args.id
+            return args.id;
+        },
+        updateTodo: (parent, args, context, info) => {
+            for (let i in todos) {
+                if (todos[i].id === args.id) {
+                    todos[i].completed = !todos[i].completed;
+                }
+            }
+            return args.id;
         }
     }
 };
@@ -75,5 +86,6 @@ app.use(cors());
 
 const port = process.env.PORT || 4000;
 
-app.listen(port, () =>
-    console.log(`***********SERVER UP ON ${port}************`))
+app.listen({ port: 4000 }, () =>
+    console.log('Server up on http://localhost:4000' + server.graphqlPath)
+);
