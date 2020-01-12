@@ -40,6 +40,7 @@ function App() {
   // send data back to the server using mutations
   const [createTodo] = useMutation(CREATE_TODO);
   const [deleteTodo] = useMutation(REMOVE_TODO);
+  const [updateTodo] = useMutation(UPDATE_TODO);
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>Error reading todos</p>;
@@ -68,6 +69,11 @@ function App() {
               deleteTodo({ variables: { id: todo.id } });
               window.location.reload();
             }}>X</button>
+            {/* Button passes the id of the todo to the server which in turn updates it */}
+            <button className={`btn btn-sm ${todo.completed ? "btn-success" : "btn-info"}`} onClick={() => {
+              updateTodo({ variables: { id: todo.id } });
+              window.location.reload();
+            }}>{todo.completed ? <span>Completed</span> : <span>Not completed</span>}</button>
           </li>
         )}
       </ul>
