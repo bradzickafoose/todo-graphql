@@ -33,10 +33,12 @@ const UPDATE_TODO = gql`
 `;
 
 function App() {
-
+  let input;
   // useQuery to read todos from the server
   // Use object destructuring to get data, loading, error which is used to update the UI
   const { data, loading, error } = useQuery(READ_TODOS);
+  // send data back to the server using mutations
+  const [createTodo] = useMutation(CREATE_TODO);
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>Error reading todos</p>;
@@ -45,8 +47,13 @@ function App() {
   return (
     <div className="App">
       <h3>Create New Todo</h3>
-      <form onSubmit={}>
-        <input className="form-control" type="text" placeholder="Enter todo"></input>
+      <form onSubmit={e => {
+        e.preventDefault();
+        createTodo({ variables: { text: input.value } });
+        input.value = '';
+        window.location.reload();
+      }}>
+        <input className="form-control" type="text" placeholder="Enter todo" ref={node => { input = node; }}></input>
         <button className="btn btn-primary" type="submit">Add</button>
       </form>
       <ul>
