@@ -44,20 +44,19 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3>Create New Todo</h3>
+      <form onSubmit={}>
+        <input className="form-control" type="text" placeholder="Enter todo"></input>
+        <button className="btn btn-primary" type="submit">Add</button>
+      </form>
+      <ul>
+        {data.todos.map((todo) =>
+          <li key={todo.id}>
+            <span className={todo.completed ? "Done" : "Pending"}>{todo.text}</span>
+            <button className="btn btn-sm btn-danger" onClick={}>X</button>
+          </li>
+        )}
+      </ul>
     </div>
   );
 }
